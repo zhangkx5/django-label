@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>发布查询</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="/static/css/uikit.gradient.min.css">
+		<link rel="stylesheet" type="text/css" href="/static/css/uikit.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/components/upload.css">
+		<script src="/static/jquery.min.js"></script>
+		<script type="text/javascript" src="/static/js/uikit.min.js"></script>
+        <script type="text/javascript" src="/static/js/components/upload.js"></script>
+{#        <script>#}
+{#            $(function(){#}
+{#                var progressbar = $("#progressbar"),#}
+{#                    bar         = progressbar.find('.uk-progress-bar'),#}
+{#                    settings    = {#}
+{#                    action: '/', // 上传路径 url#}
+{#                    allow : '*.(xlsx|csv|xls)', // 只允许上传xlsx/csv/xls#}
+{#                    loadstart: function() {#}
+{#                        bar.css("width", "0%").text("0%");#}
+{#                        progressbar.removeClass("uk-hidden");#}
+{#                    },#}
+{#                    progress: function(percent) {#}
+{#                        percent = Math.ceil(percent);#}
+{#                        bar.css("width", percent+"%").text(percent+"%");#}
+{#                    },#}
+{#                    allcomplete: function(response) {#}
+{#                        bar.css("width", "100%").text("100%");#}
+{#                        setTimeout(function(){#}
+{#                            progressbar.addClass("uk-hidden");#}
+{#                        }, 250);#}
+{#                        alert("Upload Completed")#}
+{#                    }#}
+{#                };#}
+{#                var select = UIkit.uploadSelect($("#upload-select"), settings),#}
+{#                    drop   = UIkit.uploadDrop($("#upload-drop"), settings);#}
+{#            });#}
+{#        </script>#}
+	</head>
+	<body>
+		<div class="uk-container uk-container-center uk-margin-top">
+			<div class="uk-panel uk-panel-box">
+				<form method="post" action="" enctype="multipart/form-data" class="uk-form uk-width-medium-1-3">
+					<h1>发布查询</h1>
+                    {% csrf_token %}
+					<fieldset>
+						<div class="uk-form-row">
+							<input id="excel_file" type="file" name="excel_file">
+						</div>
+{#                        <div id="upload-drop" class="uk-placeholder uk-text-center">#}
+{#                            <i class="uk-icon-cloud-upload uk-icon-medium uk-text-muted uk-margin-small-right">#}
+{#                            </i>#}
+{#                            "将文件拖拽至此 或  "#}
+{#                            <a class="uk-form-file">#}
+{#                                "选择一个文件"#}
+{#                                <input id="upload-select" type="file">#}
+{#                            </a>#}
+{#                        </div>#}
+{#                        <div id="progressbar" class="uk-progress uk-hidden">#}
+{#                            <div class="uk-progress-bar" style="width: 100%;">100%</div>#}
+{#                        </div>#}
+                        <p>注：不上传文件，则默认使用上一次上传的文件进行查询</p>
+						<div class="uk-form-row">
+{#                            <input type="submit" value="上传" >#}
+							<button id="btn-query" class="uk-button uk-width-1-2 uk-button-primary uk-button-large">查询</button>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+            <div id="result" class="uk-panel uk-panel-box uk-margin">
+				<h1>查询结果</h1>
+                <div class="uk-tab-grid uk-margin">
+					<ul class="uk-tab" data-uk-tab="{connect:'#tab-content-1'}">
+						<li id="tab-unrelease" class="uk-width-1-6 uk-active" aria-expanded="true"><a href="">未发布</a></li>
+						<li id="tab-release" class="uk-width-1-6" aria-expanded="false"><a href="">已发布</a></li>
+						<li id="tab-plan" class="uk-width-1-6" aria-expanded="false"><a href="">计划发布</a></li>
+					</ul>
+					<div id="tab-content-1" class="uk-switcher uk-margin">
+						<table id="table-unrelease" class="uk-active uk-table uk-table-hover" aria-hidden="false">
+							<thead>
+                                <tr>
+                                    <th>excel Heading</th>
+                                    <th>excel Heading</th>
+                                    <th>excel Heading</th>
+                                    <th>excel Heading</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in result_unrelease %}
+                                    <tr>
+                                    {% for data in row %}
+                                     <td>{{ data }}</td>
+                                     {% endfor %}
+                                 </tr>
+                                {% endfor %}
+                            </tbody>
+						</table>
+						<table class="uk-table uk-table-hover" aria-hidden="true">
+							<thead>
+                                <tr>
+                                    <th>excel Heading</th>
+                                    <th>excel Heading</th>
+                                    <th>excel Heading</th>
+                                    <th>excel Heading</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in result_release %}
+                                    <tr>
+                                    {% for data in row %}
+                                     <td>{{ data }}</td>
+                                     {% endfor %}
+                                 </tr>
+                                {% endfor %}
+                            </tbody>
+						</table>
+						<table class="uk-table uk-table-hover" aria-hidden="true">
+							<thead>
+                                <tr>
+                                    <th>excel Heading</th>
+                                    <th>excel Heading</th>
+                                    <th>excel Heading</th>
+                                    <th>excel Heading</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in result_plan %}
+                                    <tr>
+                                    {% for data in row %}
+                                     <td>{{ data }}</td>
+                                     {% endfor %}
+                                 </tr>
+                                {% endfor %}
+                            </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

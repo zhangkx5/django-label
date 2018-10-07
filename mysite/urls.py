@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('label/', views.label_count),
     path('blog/', views.blog_index),
+    path('release/', views.release_result),
 ]

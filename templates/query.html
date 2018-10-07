@@ -9,6 +9,24 @@
 		<script src="/static/jquery.min.js"></script>
 		<script type="text/javascript" src="/static/js/uikit.min.js"></script>
         <script type="text/javascript" src="/static/js/components/datepicker.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#btn-query").click(function () {
+                    var start_date=$("#start_date").val();
+                    var end_date=$("#end_date").val();
+                    var excel_file=$("#excel_file").val();
+                    $.post("label/",
+                        {excel_file:excel_file},
+                        function (data, status) {
+                            $("#table-excel").html(data);
+                            $("#start_date").val(start_date);
+                            $("#end_date").val(end_date);
+                            $("#excel_file").val(excel_file);
+                        });
+                });
+            });
+        </script>
+
 	</head>
 	<body>
 		<nav class="tm-navbar uk-navbar uk-navbar-attached">
@@ -24,22 +42,22 @@
 
 		<div class="uk-container uk-container-center uk-margin-top">
 			<div class="uk-panel uk-panel-box">
-				<h1>LABEL查询</h1>
 				<form method="post" action="" enctype="multipart/form-data" class="uk-form uk-width-medium-1-3">
+					<h1>LABEL查询</h1>
                     {% csrf_token %}
 					<fieldset>
 						<div class="uk-form-row">
-							<input type="text" data-uk-datepicker="{format:'YYYY-MM-DD'}" placeholder="起始日期">
+							<input id="start_date" type="text" data-uk-datepicker="{format:'YYYY-MM-DD'}" placeholder="起始日期">
 						</div>
 						<div class="uk-form-row">
-							<input type="text" data-uk-datepicker="{format:'YYYY-MM-DD'}" placeholder="终止日期">
+							<input id="end_date" type="text" data-uk-datepicker="{format:'YYYY-MM-DD'}" placeholder="终止日期">
 						</div>
 						<div class="uk-form-row">
-							<input type="file" name="excel_file" >
+							<input id="excel_file" type="file" name="excel_file" >
 						</div>
 						<div class="uk-form-row">
 {#                            <input type="submit" value="上传" >#}
-							<button class="uk-button uk-width-1-2 uk-button-primary uk-button-large" data-uk-toggle="{target:'#query-result'}">查询</button>
+							<button id="btn-query" class="uk-button uk-width-1-2 uk-button-primary uk-button-large">查询</button>
 						</div>
 						<br>
 						<div class="uk-form-row">
@@ -53,7 +71,34 @@
 				<!-- <a href="" class="uk-button uk-button-primary uk-button-large">查询</a> -->
 			</div>
 
-			<div id="query-result" class="uk-panel uk-margin" aria-hidden="true">
+			<div id="result" class="uk-panel uk-panel-box uk-margin">
+				<h1>结果</h1>
+				<table class="uk-table uk-table-hover">
+					<thead>
+						<tr>
+							<th>起始时间</th>
+							<th>终止时间</th>
+							<th>excel标签数量</th>
+							<th>mysql标签数量</th>
+							<th>db2标签数量</th>
+							<th>测试管理平台工单数量</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Table Date</td>
+							<td>Table Date</td>
+							<td>Table Date</td>
+							<td>Table Date</td>
+							<td>Table Date</td>
+							<td>Table Date</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div id="details" class="uk-panel uk-panel-box uk-margin" aria-hidden="true">
+				<h1>明细</h1>
 				<div class="uk-tab-grid uk-margin">
 					<ul class="uk-tab" data-uk-tab="{connect:'#tab-content-1'}">
 						<li id="tab-excel" class="uk-width-1-5 uk-active" aria-expanded="true"><a href="">excel</a></li>
@@ -62,7 +107,7 @@
 						<li id="tab-testmanager" class="uk-width-1-5" aria-expanded="false"><a href="">testmanager</a></li>
 					</ul>
 					<div id="tab-content-1" class="uk-switcher uk-margin">
-						<table class="uk-active uk-table uk-table-hover" aria-hidden="false">
+						<table id="table-excel" class="uk-active uk-table uk-table-hover" aria-hidden="false">
 							<thead>
 								<tr>
 									<th>excel Heading</th>
@@ -147,33 +192,6 @@
 					</div>
 				</div>
 			</div>
-
-			<table class="uk-table uk-table-hover">
-				<thead>
-					<tr>
-						<th>Table Heading</th>
-						<th>Table Heading</th>
-						<th>Table Heading</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Table Date</td>
-						<td>Table Date</td>
-						<td>Table Date</td>
-					</tr>
-					<tr>
-						<td>Table Date</td>
-						<td>Table Date</td>
-						<td>Table Date</td>
-					</tr>
-					<tr>
-						<td>Table Date</td>
-						<td>Table Date</td>
-						<td>Table Date</td>
-					</tr>
-				</tbody>
-			</table>
 		</div>
 
 	</body>

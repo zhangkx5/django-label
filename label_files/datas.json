@@ -1,0 +1,13 @@
+{"code":"","message":"","refUrl":"","totalNum":0,"curPge":0,"stateDes":"成功",
+"allObjects":[
+{"productId":"LA04","componentName":"MobileBank_Distribute","envName":"MOBILE-SH06","label":"111","releaseTime":"2018-08-13 19:42:23","result":"成功"},
+{"productId":"LA04","componentName":"MobileBank_Distribute","envName":"MOBILE-SH03","label":"123","releaseTime":"2018-08-13 19:42:23","result":"成功"},
+{"productId":"LA04","componentName":"MobileBank_Distribute","envName":"MOBILE-SH03","label":"133","releaseTime":"2018-08-13 19:42:23","result":"成功"},
+{"productId":"LA04","componentName":"MobileBank_Distribute","envName":"MOBILE-SH03","label":"113","releaseTime":"2018-08-13 19:42:23","result":"成功"}
+],
+"allObjectsOrEmptyList":[
+{"productId":"LA04","componentName":"MobileBank_Distribute","envName":"MOBILE-SH47","label":"114","releaseTime":"2018-08-13 20:55:51","result":"成功"},
+{"productId":"LA04","componentName":"MobileBank_Distribute","envName":"MOBILE-SH49","label":"117","releaseTime":"2018-08-13 20:55:51","result":"成功"}
+],
+"state":"01"
+}
